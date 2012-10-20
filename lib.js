@@ -33,6 +33,10 @@ exports.findPrime = function(n) {
   return i;
 }
 
+exports.isPythagoreanTriplet = function(a, b, c) {
+  return a*a + b*b === c*c;
+}
+
 exports._test = function() {
   console.log(exports.isFactor(20, 4));
   console.log(exports.isFactor(21, 4) === false);
@@ -41,6 +45,11 @@ exports._test = function() {
   console.log(exports.areFactors(3, [3, 1]));
   console.log(exports.areFactors(21, [3, 7, 1]));
   console.log(exports.areFactors(21, [3, 8, 1]) === false);
+
+  console.log(exports.isPythagoreanTriplet(3, 4, 5));
+  console.log(exports.isPythagoreanTriplet(3, 4, 6) === false);
 }
 
-//exports._test();
+if (process.argv[1].indexOf('lib.js') === process.argv[1].length - 6) {
+  exports._test();
+}
