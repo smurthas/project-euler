@@ -1,6 +1,8 @@
 // Work out the first ten digits of the sum of the following one-hundred
 // 50-digit numbers.
 
+var lib = require('./lib');
+
 exports.input = {
   nums: [
     '37107287533902102798797998220837590246510135740250',
@@ -109,48 +111,9 @@ exports.input = {
 
 exports.expected = '5537376230';
 
-function zeroFill(a, totalLength) {
-  var len = a.length;
-  for (var i = 0; i < totalLength - len; i++) {
-    a.push(0);
-  }
-  return a;
-}
-
-function stringSum(a, b) {
-  var aa = zeroFill(stringToArray(a), b.length);
-  var bb = zeroFill(stringToArray(b), a.length);
-  var sum = [];
-  var carry = 0, i = 0;
-  for(; i < aa.length &&  i < bb.length; i++) {
-    var tmp = aa[i] + bb[i] + carry;
-    if (tmp > 9) {
-      carry = 1;
-      tmp -= 10;
-    } else carry = 0;
-    sum.push(tmp);
-  }
-  if (carry === 1) sum.push(1);
-  sum = sum.reverse();
-  return sum.join('');
-}
-
-// least significant digit in 0 position
-function stringToArray(a) {
-  var ret = [];
-  for(var i = 0; i < a.length; i++) {
-    ret.push(parseInt(a.charAt(i)));
-  }
-  return ret.reverse();
-}
-
 exports.run = function(input) {
-  var nums = input.nums;
   var digits = input.digits;
-  var sum = nums[0];
-  for (var i = 1; i < nums.length; i++) {
-    sum = stringSum(sum, nums[i]);
-  }
+  var sum = lib.sumStrings(input.nums);
   return sum.substring(0, digits);
 }
 
