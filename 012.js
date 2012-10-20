@@ -34,6 +34,7 @@ exports.run = function(numFactors) {
 
 
 exports.input = 500;
+exports.expected = 76576500;
 
 exports.test = {
   input: 5,
