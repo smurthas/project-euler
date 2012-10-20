@@ -15,7 +15,7 @@ exports.intSqrt = function (num) { return Math.floor(Math.sqrt(num)); }
 exports.isPrime = function (n) {
   if (n < 2) return false;
   if (n === 2) return true;
-  if (n % 2 == 0) return false;
+  if (n % 2 === 0) return false;
   var mx = exports.intSqrt(n);
   if (mx % 2 === 0) mx++;
   for (var i = mx; i > 1; i-=2) {
@@ -40,8 +40,7 @@ exports.findPrimeSum = function(n) {
   n -= 2;
   var sum = 2;
   var i = 1;
-  while (i < n) {
-    i+=2;
+  for(var i = 1; i < n; i+=2) {
     if (exports.isPrime(i)) sum += i;
   }
   return sum;
