@@ -10,8 +10,6 @@ exports.areFactors = function (num, facts) {
 
 exports.intSqrt = function (num) { return Math.floor(Math.sqrt(num)); }
 
-//console.log(intSqrt(8), intSqrt(9));
-
 exports.isPrime = function (n) {
   if (n < 2) return false;
   if (n === 2) return true;
@@ -23,8 +21,6 @@ exports.isPrime = function (n) {
   }
   return true;
 }
-
-//console.log(isPrime(1), isPrime(2), isPrime(3), isPrime(4), isPrime(5), isPrime(49), isPrime(71));
 
 exports.findPrime = function(n) {
   var primes = 0;
@@ -71,6 +67,44 @@ exports.getFactors = function(n) {
   return factors;
 }
 
+exports.nCr = function(n, r) {
+  if (n > 25) return exports.pascal(n)[r];
+  var nCr = 1;
+  for (var i = n; i > r; i--) nCr *= i;
+  for (var i = (n-r); i > 1; i--) nCr /= i;
+  return nCr;
+}
+
+exports.factorial = function(n) {
+  if (n === 2) return 2;
+  if (n === 1) return 1;
+  if (n === 0) return 1;
+  var fact = n;
+  for (var i = n-1; i > 1; i--) fact *= i;
+  return fact;
+}
+
+exports.pascal = function(row) {
+  var cur = [1, 1], prev = [1];
+  if (row === 0) return prev;
+  if (row === 1) return cur;
+  for(var i = 1; i < row; i++) {
+    prev = cur;
+    cur = pascalNextRow(cur);
+  }
+  return cur;
+}
+
+function pascalNextRow(cur) {
+  var next = [];
+  for (var i = 0; i < cur.length; i++) {
+    var val = cur[i-1] || 0;
+    val += cur[i] || 0;
+    next.push(val);
+  }
+  next.push(1);
+  return next;
+}
 
 exports._test = function() {
   console.log(exports.isFactor(20, 4));
@@ -91,6 +125,20 @@ exports._test = function() {
   console.log(exports.getFactors(6).length === 4);
   console.log(exports.getFactors(27).length === 4);
   console.log(exports.getFactors(2).length === 2);
+
+  console.log(exports.factorial(3) === 6);
+  console.log(exports.factorial(4) === 24);
+  console.log(exports.factorial(7) === 5040);
+  console.log(exports.factorial(20) === 2432902008176640000);
+
+  console.log(exports.nCr(2, 2) === 1);
+  console.log(exports.nCr(3, 2) === 3);
+  console.log(exports.nCr(20, 10) === 184756);
+  console.log(exports.nCr(40, 20) === 137846528820);
+
+  console.log(pascalNextRow([1, 1])[1] === 2);
+  console.log(exports.pascal(4)[2] === 6);
+  console.log(exports.pascal(40)[20] === 137846528820);
 }
 
 if (process.argv[1].indexOf('lib.js') === process.argv[1].length - 6) {
