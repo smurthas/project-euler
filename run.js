@@ -15,7 +15,7 @@ for(var i in files) {
 }
 
 
-function test(problem, expected, input) {
+function test(i, problem, expected, input) {
   var start = Date.now();
   var val = problem.run(input);
   var et = Date.now() - start;
@@ -32,15 +32,15 @@ if (num) {
   num = num.substring(0, 3);
   var problem = problems[num];
   if (process.argv[3] === 'test') {
-    test(problem, problem.test.expected, problem.test.input);
+    test(num, problem, problem.test.expected, problem.test.input);
     ret = 0;
   } else {
-    if (!test(problem, problem.expected, problem.input)) ret = 1;
+    if (!test(num, problem, problem.expected, problem.input)) ret = 1;
   }
 } else {
   for (var i in problems) {
     var expected = problems[i].expected;
-    if (!test(problems[i], expected, problems[i].input)) ret = 1;
+    if (!test(i, problems[i], expected, problems[i].input)) ret = 1;
   }
 }
 
