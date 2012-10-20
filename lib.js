@@ -1,6 +1,6 @@
 exports.isFactor = function (num, fact) {
   if (num < fact) return false;
-  return (num/fact) === Math.floor(num/fact);
+  return num % fact === 0;
 }
 
 exports.areFactors = function (num, facts) {
@@ -14,8 +14,11 @@ exports.intSqrt = function (num) { return Math.floor(Math.sqrt(num)); }
 
 exports.isPrime = function (n) {
   if (n < 2) return false;
+  if (n === 2) return true;
+  if (n % 2 == 0) return false;
   var mx = exports.intSqrt(n);
-  for (var i = mx; i > 1; i--) {
+  if (mx % 2 === 0) mx++;
+  for (var i = mx; i > 1; i-=2) {
     if (exports.isFactor(n, i)) return false;
   }
   return true;
@@ -31,6 +34,17 @@ exports.findPrime = function(n) {
     if (exports.isPrime(i)) primes++;
   }
   return i;
+}
+
+exports.findPrimeSum = function(n) {
+  n -= 2;
+  var sum = 2;
+  var i = 1;
+  while (i < n) {
+    i+=2;
+    if (exports.isPrime(i)) sum += i;
+  }
+  return sum;
 }
 
 exports.isPythagoreanTriplet = function(a, b, c) {

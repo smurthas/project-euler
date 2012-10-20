@@ -32,6 +32,7 @@ exports.run = function() {
   var facts = arrayBetween(1, i);
   facts = removeCommons(facts);
   i = facts[facts.length-1];
+  i *= facts[facts.length-2];
   var inc = i;
   while(!lib.areFactors(i, facts)) {i += inc;}
   return i;
