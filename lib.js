@@ -50,10 +50,33 @@ exports.isPythagoreanTriplet = function(a, b, c) {
   return a*a + b*b === c*c;
 }
 
+exports.sumSeries = function(n) {
+  return (n+1) * n / 2;
+}
+
+exports.getFactors = function(n) {
+  if (n < 1) return [];
+  if (n === 1) return [1];
+  if (n === 2) return [1,2];
+  var factors = [1,n];
+  var max = n/2 + 1;
+  for (var i = 2; i < max; i++) {
+    if (exports.isFactor(n, i)) {
+      factors.push(i);
+      var mate = n / i;
+      if (i !== mate) factors.push(mate);
+      max = mate;
+    }
+  }
+  return factors;
+}
+
+
 exports._test = function() {
   console.log(exports.isFactor(20, 4));
   console.log(exports.isFactor(21, 4) === false);
   console.log(exports.isFactor(21, 7));
+  console.log(exports.isFactor(4, 2));
 
   console.log(exports.areFactors(3, [3, 1]));
   console.log(exports.areFactors(21, [3, 7, 1]));
@@ -61,6 +84,13 @@ exports._test = function() {
 
   console.log(exports.isPythagoreanTriplet(3, 4, 5));
   console.log(exports.isPythagoreanTriplet(3, 4, 6) === false);
+
+  console.log(exports.sumSeries(7) === 28);
+
+  console.log(exports.getFactors(4).length === 3);
+  console.log(exports.getFactors(6).length === 4);
+  console.log(exports.getFactors(27).length === 4);
+  console.log(exports.getFactors(2).length === 2);
 }
 
 if (process.argv[1].indexOf('lib.js') === process.argv[1].length - 6) {
