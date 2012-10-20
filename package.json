@@ -1,0 +1,18 @@
+{
+  "name": "project-euler",
+  "version": "0.0.0",
+  "description": "Project Euler solutions",
+  "main": "run.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/smurthas/project-euler.git"
+  },
+  "author": "Simon Murtha-Smith",
+  "license": "BSD",
+  "dependencies": {
+    "colors":""
+  }
+}

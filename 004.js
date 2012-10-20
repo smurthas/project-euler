@@ -8,13 +8,15 @@ function isPalindrome(num) {
 
 //var MAX = 99;
 var MAX = 999;
-
-var largestPalindrome = 0;
-for (var i = MAX; i > 0; i--) {
-  for (var j = MAX; j > 0; j--) {
-    var k = i*j;
-    if (k > largestPalindrome && isPalindrome(k)) largestPalindrome = k;
+exports.run = function() {
+  var largestPalindrome = 0;
+  for (var i = MAX; i > 0; i--) {
+    for (var j = MAX; j > 0; j--) {
+      var k = i*j;
+      if (k > largestPalindrome && isPalindrome(k)) largestPalindrome = k;
+    }
   }
+  return largestPalindrome;
 }
 
-console.log(largestPalindrome);
+exports.expected = 906609;

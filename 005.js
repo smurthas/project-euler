@@ -27,11 +27,14 @@ function removeCommons(arr) {
   return newArr;
 }
 
-var i = 20;
-var facts = arrayBetween(1, i);
-facts = removeCommons(facts);
-i = facts[facts.length-1];
-var inc = i;
-while(!lib.areFactors(i, facts)) {i += inc;}
+exports.run = function() {
+  var i = 20;
+  var facts = arrayBetween(1, i);
+  facts = removeCommons(facts);
+  i = facts[facts.length-1];
+  var inc = i;
+  while(!lib.areFactors(i, facts)) {i += inc;}
+  return i;
+}
 
-console.log(i);
+exports.expected = 232792560;
